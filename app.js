@@ -6,6 +6,8 @@ const morgan = require("morgan");
 require("dotenv").config();
 const cors = require("cors");
 const registerRoute = require("./routes/users");
+const productRouter=require('./routes/products');
+const uploadRouter = require('./routes/upload_route');
 
 
 var app = express();
@@ -33,6 +35,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/register", registerRoute);
+app.use('/upload', uploadRouter);
+app.use('/product', productRouter);
 
 app.use(auth.verifyUser);
 

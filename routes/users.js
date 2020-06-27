@@ -2,9 +2,9 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const Register = require("../models/registration");
+const Register = require("../models/users");
 const router = express.Router();
-const auth = require("../middleware/auth");
+const auth = require('../auth');
 
 router.post("/register", (req, res, next) => {
 	let password = req.body.password;
@@ -52,7 +52,7 @@ router.post("/login_user", (req, res, next) => {
 					.catch(next);
 			}
 		})
-		.catch(next);
+		.catch(next)
 });
 
 router.get("/me", auth.verifyUser, (req, res, next) => {

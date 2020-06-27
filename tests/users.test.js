@@ -4,11 +4,12 @@ const Users=require('../models/users');
 const mongoose=require('mongoose');
 
 //new name of database
-const url='mongodb://localhost:27001/test_database';
+const url='mongodb://localhost:27017/test_database';
 beforeAll(async()=> {
     await mongoose.connect(url,{
         useNewUrlParser:true,
-        useCreateIndex:true
+        useCreateIndex:true,
+        useUnifiedTopology:true
     });
 });
 
@@ -25,5 +26,6 @@ describe(' User Schema Test',()=>{
             'email':'TP2USB@gmail.com'
         }
     })
-    
+
 })
+

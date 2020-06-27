@@ -20,9 +20,6 @@ const Register = new mongoose.Schema({
 	},
 	password: {
 		type: String
-	},
-	security: {
-		type: String
 	}
 });
 

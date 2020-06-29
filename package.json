@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/UtkrishtaBhattarai/api-fruitshot/issues"
   },
-  "homepage": "https://github.com/UtkrishtaBhattarai/api-fruitshot#readme"
+  "homepage": "https://github.com/UtkrishtaBhattarai/api-fruitshot#readme",
+  "directories": {
+    "test": "tests"
+  }
 }

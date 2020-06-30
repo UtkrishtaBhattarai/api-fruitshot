@@ -155,6 +155,8 @@ router.get("/me", auth.verifyUser, (req, res, next) => {
 
 //updating my detail
 router.put("/me", auth.verifyUser, (req, res, next) => {
+  console.log(req.body)
+  return;
   Register.findByIdAndUpdate(req.body._id, { $set: req.body }, { new: true })
     .then(register => {
       res.json({

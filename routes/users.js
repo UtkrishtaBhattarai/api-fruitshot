@@ -2,8 +2,10 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Register = require("../models/users");
+const Admin=require('../models/admin');
 const router = express.Router();
 const auth = require("../auth");
+const admin = require("../models/admin");
 
 //used for registering user
 router.post("/register", (req, res, next) => {
@@ -22,6 +24,25 @@ router.post("/register", (req, res, next) => {
     })
       .then(register => {
         let token = jwt.sign({ _id: register._id }, process.env.SECRET);
+        res.json({ status: "Signup success!", token: token });
+      })
+      .catch(next);
+  });
+});
+
+//for admin
+router.post("/register_admin", (req, res, next) => {
+  let password = req.body.password;
+  bcrypt.hash(password, 10, function(err, hash) {
+    if (err) {
+      throw new Error("Could not hash!");
+    }
+    Admin.create({
+      email: req.body.email,
+      password: hash,
+    })
+      .then(admin => {
+        let token = jwt.sign({ _id: admin._id }, process.env.SECRET);
         res.json({ status: "Signup success!", token: token });
       })
       .catch(next);
@@ -66,6 +87,49 @@ router.post("/login_user", (req, res, next) => {
             }
 
             let token = jwt.sign({ _id: register._id }, process.env.SECRET);
+            console.log(token);
+            res.json({ status: "Login success!", token: token });
+          })
+          .catch(next);
+      }
+    })
+    .catch(next);
+});
+
+//mydetails
+router.get("/me", auth.verifyUser, (req, res, next) => {
+  let password = req.Register.password;
+  bcrypt.hash(password, 10);
+  res.json({
+    _id: req.Register._id,
+    fname: req.Register.fname,
+    lname: req.Register.lname,
+    email: req.Register.email,
+    address: req.Register.address,
+    number: req.Register.number
+  });
+});
+
+//login admin
+router.post("/login_admin", (req, res, next) => {
+  console.log(req.body);
+  Admin.findOne({ email: req.body.email })
+    .then(admin => {
+      if (admin == null) {
+        let err = new Error("User not found!");
+        err.status = 401;
+        return next(err);
+      } else {
+        bcrypt
+          .compare(req.body.password, admin.password)
+          .then(isMatch => {
+            if (!isMatch) {
+              let err = new Error("Password does not match!");
+              err.status = 401;
+              return next(err);
+            }
+
+            let token = jwt.sign({ _id: admin._id }, process.env.SECRET);
             console.log(token);
             res.json({ status: "Login success!", token: token });
           })

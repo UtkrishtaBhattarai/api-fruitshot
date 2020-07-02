@@ -6,12 +6,12 @@ const morgan = require("morgan");
 require("dotenv").config();
 const cors = require("cors");
 const registerRoute = require("./routes/users");
-const productRouter=require('./routes/products');
-const uploadRouter = require('./routes/upload_route');
-
+const productRouter = require("./routes/products");
+const uploadRouter = require("./routes/upload_route");
+const SliderRoute = require("./routes/slider_route");
 
 var app = express();
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(
 	bodyparser.urlencoded({
-		extended: false
+		extended: false,
 	})
 );
 
@@ -35,8 +35,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/register", registerRoute);
-app.use('/upload', uploadRouter);
-app.use('/product', productRouter);
+app.use("/upload", uploadRouter);
+app.use("/product", productRouter);
+app.use("/slider", SliderRoute);
 
 app.use(auth.verifyUser);
 

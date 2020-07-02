@@ -1,7 +1,22 @@
-console.log("this is cart");
+const mongoose = require('mongoose');
+const Cart = mongoose.Schema({
 
+    userid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'register',
+        required: true
+    },
 
+    productid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'spareproduct',
+        required: true
+    },
+    name: String,
+    price: String,
+    description: String,
+    usage: String,
+    image:String
 
-
-var a=1;
-print(a);
+})
+module.exports = mongoose.model('cart', Cart);

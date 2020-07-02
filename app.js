@@ -9,6 +9,7 @@ const registerRoute = require("./routes/users");
 const productRouter = require("./routes/products");
 const uploadRouter = require("./routes/upload_route");
 const SliderRoute = require("./routes/slider_route");
+const CartRoute = require('./routes/cart');
 
 var app = express();
 app.use(function (req, res, next) {
@@ -38,6 +39,7 @@ app.use("/register", registerRoute);
 app.use("/upload", uploadRouter);
 app.use("/product", productRouter);
 app.use("/slider", SliderRoute);
+app.use('/cart', CartRoute);
 
 app.use(auth.verifyUser);
 

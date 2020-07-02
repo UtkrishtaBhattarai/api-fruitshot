@@ -88,7 +88,7 @@ router.post("/login_user", (req, res, next) => {
 
             let token = jwt.sign({ _id: register._id }, process.env.SECRET);
             console.log(token);
-            res.json({ status: "Login success!", token: token });
+            res.json({ status: "Login success!", token: token, name:register.fname});
           })
           .catch(next);
       }

@@ -2,7 +2,7 @@
 const Product = require("../models/product");
 const mongoose = require("mongoose");
 // use the new name of the database
-const url = "mongodb://localhost:27017/spare_api_test";
+const url = "mongodb://localhost:27017/fruitshit_api_test";
 beforeAll(async () => {
   await mongoose.connect(url, {
     useNewUrlParser: true,
@@ -20,7 +20,7 @@ describe("Product Schema test", () => {
   // the code below is for insert testing
   it("Add product testing anything", () => {
     const product = {
-      name: "Bike Chasis",
+      name: "Apple",
       price: 1233
     };
     return Product.create(product).then(pro_ret => {
@@ -32,16 +32,16 @@ describe("Product Schema test", () => {
     return product
       .findOneAndUpdate(
         { _id: Object("5e479758fae5043858633ff8") },
-        { $set: { name: "chasis" } }
+        { $set: { name: "apple" } }
       )
       .then(product => {
-        expect(product.name).toEqual("chasis");
+        expect(product.name).toEqual("apple");
       });
   });
 
   //the code below is for delete testing
   it("to test the delete register is working or not", async () => {
-    const status = await Register.deleteMany();
+    const status = await Product.deleteMany();
     expect(status.ok).toBe(1);
   });
 });

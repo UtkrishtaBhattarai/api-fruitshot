@@ -231,5 +231,35 @@ router.delete("/deleteuser/:id", function(req, res, next) {
   });
 });
 
+router.delete("/deleteme", (req, res, next) => {
+  console.log("lol")
+  console.log(req.body.register);
+  return;
+  Register.findByIdAndDelete({  })
+    .then(register => {
+      if (register == null) {
+        let err = new Error("User not found!");
+        err.status = 401;
+        return next(err);
+      } else {
+        bcrypt
+          .compare(req.body.password, register.password)
+          .then(isMatch => {
+            if (!isMatch) {
+              let err = new Error("Password does not match!");
+              err.status = 401;
+              return next(err);
+            }
+
+            let token = jwt.sign({ _id: register._id }, process.env.SECRET);
+            console.log(token);
+            res.json({ status: "Login success!", token: token, name:register.fname, email:register.email});
+          })
+          .catch(next);
+      }
+    })
+    .catch(next);
+  });
+
 //exporting current route
 module.exports = router;

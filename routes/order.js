@@ -112,4 +112,12 @@ router.put("/updatestatus/:id", function(req, res, next) {
     });
   });
 
+
+  router.delete('/deleteorder/:id', function (req, res) {
+    Order.findByIdAndDelete(req.params.id, req.body, function (err, order) {
+        if (err) return next(err);
+        res.json(Order);
+    });
+});
+
 module.exports = router;

@@ -2,7 +2,7 @@
 const Notification = require("../models/notification");
 const mongoose = require("mongoose");
 // use the new name of the database
-const url = "mongodb://localhost:27017/spare_api_test";
+const url = "mongodb://localhost:27017/fruitshot_api_test";
 beforeAll(async () => {
   await mongoose.connect(url, {
     useNewUrlParser: true,

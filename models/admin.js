@@ -3,12 +3,12 @@ const jwt = require("jsonwebtoken");
 
 const Admin = new mongoose.Schema({
 	email: {
-        type: String,
-        required:true    
+        type: String
 	},
 	password: {
 		type: String
 	}
 });
+
 
 module.exports = mongoose.model("admin_login", Admin);

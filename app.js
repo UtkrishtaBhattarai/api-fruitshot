@@ -2,6 +2,7 @@ const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
 const auth = require("./auth");
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const morgan = require("morgan");
 require("dotenv").config();
 const cors = require("cors");
@@ -45,6 +46,27 @@ app.use('/cart', CartRoute);
 app.use('/order', OrderRoute);
 app.use('/email',emailRoute);
 app.use(auth.verifyUser);
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/fruitshot";
+
+MongoClient.connect(url, function(err, db) {
+
+  if (err) throw err;
+  let password1="admin123";
+  bcrypt.hash(password1, 10, function(err, hash) {
+    if (err) {
+      throw new Error("Could not hash!");
+	}
+	
+  var dbo = db.db("fruitshot");
+  var myobj = { email: "admin123@gmail.com",password:hash};
+  dbo.collection("admin_logins").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+  });
+})});
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);

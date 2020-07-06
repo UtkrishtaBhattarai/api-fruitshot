@@ -1,5 +1,5 @@
 // use the path of your model
-const Cart = require("../models/cart");
+const Cart = require("../../models/cart");
 const mongoose = require("mongoose");
 // use the new name of the database
 const url = "mongodb://localhost:27017/spare_api_test";

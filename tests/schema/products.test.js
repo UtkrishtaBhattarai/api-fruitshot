@@ -1,5 +1,5 @@
 // use the path of your model
-const Product = require("../models/product");
+const Product = require("../../models/product");
 const mongoose = require("mongoose");
 // use the new name of the database
 const url = "mongodb://localhost:27017/fruitshit_api_test";

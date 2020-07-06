@@ -1,5 +1,5 @@
 // use the path of your model
-const Register = require("../models/users");
+const Register = require("../../models/users");
 const mongoose = require("mongoose");
 // use the new name of the database
 const url = "mongodb://localhost:27017/fruitshot_api_test";

@@ -6,6 +6,7 @@ const Admin=require('../models/admin');
 const router = express.Router();
 const auth = require("../auth");
 const admin = require("../models/admin");
+const nodemailer=require("nodemailer");
 
 //used for registering user
 router.post("/register", (req, res, next) => {
@@ -49,23 +50,6 @@ router.post("/register_admin", (req, res, next) => {
   });
 });
 
-//forgot password
-router.post("/forgotpassword", (req, res, next) => {
-  let password = req.body.password;
-  bcrypt.hash(password, 10, function(err, hash) {
-    if (err) {
-      throw new Error("Could not hash!");
-    }
-    Register.findOne({
-      email: req.body.email,
-      number: req.body.number
-    })
-      .then(register => {
-        password: hash;
-      })
-      .catch(next);
-  });
-});
 
 //login user
 router.post("/login_user", (req, res, next) => {
@@ -261,5 +245,45 @@ router.delete("/deleteme", (req, res, next) => {
     .catch(next);
   });
 
-//exporting current route
+
+  router.post("/forgotpassword", (req, res, next) => 
+{
+  let password = req.body.password;
+  bcrypt.hash(password, 10, function(err, hash) {
+    if (err) {
+      throw new Error("Could not hash!");
+    }
+    Register.findOne({ email: req.body.email }).then(reg=>{
+      Register.findByIdAndUpdate(reg._id, {"password": hash }, { new: true })
+        .then((updated) => {
+            res.json({ status: "Success" });
+        })
+      console.log(reg.address)
+      console.log(hash)
+    });
+    })
+var transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'fruitshot13@gmail.com',
+    pass: 'fruitshot123#'
+  }
+});
+
+var mailOptions = {
+  from: 'fruitshot13@gmail.com',
+  to: req.body.email,
+  subject: 'Forgot Password',
+  text: 'Hello' +" "+req.body.email+ " "+ ' Your new password is '+req.body.nor ,
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+})
+});
+
 module.exports = router;

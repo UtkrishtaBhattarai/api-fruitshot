@@ -70,6 +70,7 @@ MongoClient.connect(url, function (err, db) {
   });
 });
 
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.statusCode = 500;

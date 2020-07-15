@@ -140,8 +140,7 @@ router.get("/me", auth.verifyUser, (req, res, next) => {
 //updating my detail
 router.put("/me", auth.verifyUser, (req, res, next) => {
   console.log(req.body)
-  return;
-  Register.findByIdAndUpdate(req.body._id, { $set: req.body }, { new: true })
+  Register.findByIdAndUpdate(req.body.register._id, { $set: req.body }, { new: true })
     .then(register => {
       res.json({
         fname: register.fname,
@@ -248,6 +247,7 @@ router.delete("/deleteme", (req, res, next) => {
 
   router.post("/forgotpassword", (req, res, next) => 
 {
+  console.log(req.body)
   let password = req.body.password;
   bcrypt.hash(password, 10, function(err, hash) {
     if (err) {
@@ -274,7 +274,7 @@ var mailOptions = {
   from: 'fruitshot13@gmail.com',
   to: req.body.email,
   subject: 'Forgot Password',
-  text: 'Hello' +" "+req.body.email+ " "+ ' Your new password is '+req.body.nor ,
+  text: 'Hello' +" "+req.body.email+ " "+ ' Your new password is '+req.body.password ,
 };
 
 transporter.sendMail(mailOptions, function(error, info){

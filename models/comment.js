@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Cart = mongoose.Schema({
+const Comment = mongoose.Schema({
 
     userid: {
         type: mongoose.Schema.Types.ObjectId,
@@ -12,11 +12,8 @@ const Cart = mongoose.Schema({
         ref: 'products',
         required: true
     },
-    name: String,
-    price: String,
-    description: String,
-    usage: String,
-    image:String
+    actcomment: String,
+    email:String
 
 })
-module.exports = mongoose.model('cart', Cart);
+module.exports = mongoose.model('comment', Comment);

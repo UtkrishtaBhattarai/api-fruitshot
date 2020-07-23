@@ -13,7 +13,7 @@ const Comment = mongoose.Schema({
         required: true
     },
     actcomment: String,
-    email:String
+    email:String 
 
 })
 module.exports = mongoose.model('comment', Comment);

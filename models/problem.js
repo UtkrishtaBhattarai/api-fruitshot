@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
 const Problem = new mongoose.Schema({
-	problem: {
+	complaint: {
 		type: String
 		
 	},
 	email: {
 		type: String
-	}
+	},
 });
 
 

@@ -15,6 +15,7 @@ const OrderRoute = require("./routes/order");
 const emailRoute = require("./routes/nodemailer");
 const notificationRoute = require("./routes/notification");
 const commentroute=require("./routes/comment")
+const complaintRoute=require("./routes/problem")
 
 var app = express();
 app.use(function (req, res, next) {
@@ -49,6 +50,7 @@ app.use("/order", OrderRoute);
 app.use("/email", emailRoute);
 app.use("/notification", notificationRoute);
 app.use("/comment", commentroute);
+app.use("/complaint",complaintRoute)
 app.use(auth.verifyUser);
 
 

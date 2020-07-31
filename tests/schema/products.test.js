@@ -31,7 +31,7 @@ describe("Product Schema test", () => {
   it("to test the update", async () => {
     return product
       .findOneAndUpdate(
-        { _id: Object("5e479758fae5043858633ff8") },
+        { _id: Object("5f0533e2a719b93f6447bfae") },
         { $set: { name: "apple" } }
       )
       .then(product => {

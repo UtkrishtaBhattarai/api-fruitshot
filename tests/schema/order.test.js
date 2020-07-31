@@ -16,12 +16,12 @@ afterAll(async () => {
 describe("Order Schema test", () => {
   it("Add Order testing anything", () => {
     const Order = {
-      userid: "98327439",
-      productid: "jbsajdb87y78",
+      userid: "5f0533e2a719b93f6447bfae",
+      productid: "5efb48edd3e12f1fc065d2a9",
       quantity:"2"
     };
     return order.create(Order).then(pro_ret => {
-      expect(pro_ret.userid).toEqual("98327439");
+      expect(pro_ret.userid).toEqual("5f0533e2a719b93f6447bfae");
     });
   });
   it("to test the delete order is working or not", async () => {

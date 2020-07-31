@@ -97,4 +97,60 @@ router.get("/getproductc", (req, res, next) => {
     });
 });
 
+
+router.put("/likeproduct/:id", function(req, res, next) {
+  var id = req.params.id;
+  Product.findOne({ _id: id }, function(err, foundObject) {
+    if (err) {
+      console.log(err);
+      res.status(500).send();
+    } else {
+      if (!foundObject) {
+        res.status(404).send();
+      } else {
+        if (req.body.is_liked) {
+          foundObject.is_liked = req.body.is_liked;
+        }
+
+        foundObject.save(function(err, updatedObject) {
+          if (err) {
+            console.log(err);
+            res.status(500).send();
+          } else {
+            res.send(updatedObject);
+          }
+        });
+      }
+    }
+  });
+});
+
+
+
+router.put("/dislike/:id", function(req, res, next) {
+  var id = req.params.id;
+  Product.findOne({ _id: id }, function(err, foundObject) {
+    if (err) {
+      console.log(err);
+      res.status(500).send();
+    } else {
+      if (!foundObject) {
+        res.status(404).send();
+      } else {
+        if (req.body.is_disliked) {
+          foundObject.is_disliked = req.body.is_disliked;
+        }
+
+        foundObject.save(function(err, updatedObject) {
+          if (err) {
+            console.log(err);
+            res.status(500).send();
+          } else {
+            res.send(updatedObject);
+          }
+        });
+      }
+    }
+  });
+});
 module.exports = router;

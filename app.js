@@ -16,6 +16,7 @@ const emailRoute = require("./routes/nodemailer");
 const notificationRoute = require("./routes/notification");
 const commentroute=require("./routes/comment")
 const complaintRoute=require("./routes/problem")
+const likedislikeRote=require("./routes/likedislike")
 
 var app = express();
 app.use(function (req, res, next) {
@@ -51,6 +52,7 @@ app.use("/email", emailRoute);
 app.use("/notification", notificationRoute);
 app.use("/comment", commentroute);
 app.use("/complaint",complaintRoute)
+app.use("/likedislike",likedislikeRote)
 app.use(auth.verifyUser);
 
 

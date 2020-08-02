@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
+//Admin model
 const Admin = new mongoose.Schema({
 	email: {
 		type: String,

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Cart = mongoose.Schema({
 
+    //cart model
     userid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'register',

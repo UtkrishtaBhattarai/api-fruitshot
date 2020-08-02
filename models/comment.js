@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Comment = mongoose.Schema({
 
+    //comment model
     userid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'register',

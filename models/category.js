@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
+//category model
 const Category = new mongoose.Schema({
 	categoryName: {
 		type: String,

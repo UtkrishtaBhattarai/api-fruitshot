@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const productSchema = mongoose.Schema({
+   
+    //likeanddislike model
     productid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'products',

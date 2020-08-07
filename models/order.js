@@ -9,6 +9,7 @@ const orderSchema = mongoose.Schema({
     dispatched: String,
     quantity: Number,
     grandtotal:String,
-    image:String
+    image:String,
+    orderdate:String
 });
 module.exports = mongoose.model('Order', orderSchema);

@@ -20,6 +20,9 @@ const Register = new mongoose.Schema({
 	},
 	password: {
 		type: String
+	},
+	createddate:{
+		type:Date
 	}
 });
 

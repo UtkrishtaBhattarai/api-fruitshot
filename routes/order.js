@@ -33,7 +33,8 @@ router.post("/addorder1", (req, res, next) => {
     image:req.body.products.image,
     ordernumber: req.body.ordernumber,
     dispatched: "no",
-    quantity: req.body.quantity
+    quantity: req.body.quantity,
+    orderdate:Date.now()
   })
     .then(order => {
       res.json({ status: "Product Added!" });

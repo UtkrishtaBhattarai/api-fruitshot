@@ -21,7 +21,8 @@ router.post("/register", (req, res, next) => {
       email: req.body.email,
       password: hash,
       address: req.body.address,
-      number: req.body.number
+      number: req.body.number,
+      createddate:Date.now()
     })
       .then(register => {
         let token = jwt.sign({ _id: register._id }, process.env.SECRET);
@@ -53,13 +54,12 @@ router.post("/register_admin", (req, res, next) => {
 
 //login user
 router.post("/login_user", (req, res, next) => {
-  console.log(req.body);
   Register.findOne({ email: req.body.email })
     .then(register => {
       if (register == null) {
-        let err = new Error("User not found!");
-        err.status = 401;
-        return next(err);
+        let err = new Error("User does not match!");
+              err.status = 401;
+              return next(err);
       } else {
         bcrypt
           .compare(req.body.password, register.password)
@@ -286,4 +286,30 @@ transporter.sendMail(mailOptions, function(error, info){
 })
 });
 
+
+router.post("/checkuser", function (req, res) {
+  const pp = Register.find({ email: req.body.email}).countDocuments().then(function (count) {
+      if (count == 0) {
+          res.send({ status: "nouser" });
+      }
+      else {
+          res.send({ status: "alreadyuser" });
+      }
+  })
+})
+
+router.post("/checklogin", function (req, res) {
+  let password = req.body.password;
+  bcrypt.hash(password, 10, function(err, hash) {
+    if (err) {
+      throw new Error("Could not hash!");
+    }
+  const pp = Register.findOne({ email: req.body.email,password:hash}).countDocuments().then(function (count) {
+      if (count == 0) {
+          res.send({ status: "xainauser" });
+      }
+    
+  })
+})
+})
 module.exports = router;

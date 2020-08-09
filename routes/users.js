@@ -274,7 +274,7 @@ var mailOptions = {
   from: 'fruitshot13@gmail.com',
   to: req.body.email,
   subject: 'Forgot Password',
-  text: 'Hello' +" "+req.body.email+ " "+ ' Your new password is '+req.body.password ,
+  text: 'Hello' +" "+ " "+ ' Your new password is '+req.body.password ,
 };
 
 transporter.sendMail(mailOptions, function(error, info){
